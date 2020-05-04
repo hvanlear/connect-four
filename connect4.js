@@ -7,7 +7,9 @@
 
 const WIDTH = 7;
 const HEIGHT = 6;
-
+const resetBtn = document.querySelector(".rstBtn");
+let playerOne = document.querySelector(".playerOne");
+let playerTwo = document.querySelector(".playerTwo");
 let currPlayer = 1; // active player: 1 or 2
 let board = []; // array of rows, each row is array of cells  (board[y][x])
 
@@ -51,6 +53,7 @@ function makeHtmlBoard() {
     }
     htmlBoard.append(row);
   }
+  playerTwo.classList.remove("playerTwo");
 }
 
 /** findSpotForCol: given column x, return top empty y (null if filled) */
@@ -85,6 +88,20 @@ function endGame(msg) {
   alert(msg);
 }
 
+//switch players funciton
+
+function switchPlayer() {
+  if (currPlayer === 1) {
+    currPlayer = 2;
+    playerOne.classList.remove("playerOne");
+    playerTwo.classList.add("playerTwo");
+  } else {
+    currPlayer = 1;
+    playerTwo.classList.remove("playerTwo");
+    playerOne.classList.add("playerOne");
+  }
+  // currPlayer = currPlayer === 1 ? 2 : 1;
+}
 /** handleClick: handle click of column top to play piece */
 
 function handleClick(evt) {
@@ -114,7 +131,7 @@ function handleClick(evt) {
   }
   // switch players
   // TODO: switch currPlayer 1 <-> 2
-  currPlayer = currPlayer === 1 ? 2 : 1;
+  switchPlayer();
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
@@ -170,6 +187,16 @@ function checkForWin() {
     }
   }
 }
+
+function reset() {
+  let gameB = document.querySelector("#board");
+  board = [];
+  gameB.innerHTML = "";
+  makeBoard();
+  makeHtmlBoard();
+}
+
+resetBtn.addEventListener("click", reset);
 
 makeBoard();
 makeHtmlBoard();
