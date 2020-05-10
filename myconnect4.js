@@ -153,7 +153,9 @@ function checkForWin() {
   }
 
   // TODO: read and understand this code. Add comments to help you.
-
+  //for each y coordinate and each x coordinate,
+  //check to see if the four surrounding coordinates are filled horizontally, vertically, or either direction diagonally.
+  // if there are four coordinates filled of the same color, return true
   for (var y = 0; y < HEIGHT; y++) {
     for (var x = 0; x < WIDTH; x++) {
       var horiz = [
